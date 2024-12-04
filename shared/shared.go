@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"log"
 	"os"
+	"slices"
 	"strconv"
 	"strings"
 )
@@ -34,4 +35,32 @@ func ReadFileToIntSlice(path string) [][]int {
 	}
 
 	return items
+}
+
+func IntDifference(a, b int) int {
+	if a > b {
+		return a - b
+	}
+	return b - a
+}
+
+func CheckSorting(s []int, r bool) bool {
+	res := true
+
+	if r {
+		slices.Reverse(s)
+	}
+
+	for i := 0; i < len(s)-1; i++ {
+		if s[i] >= s[i+1] {
+			res = false
+			break
+		}
+	}
+
+	return res
+}
+
+func RemoveSliceElement(slice []int, i int) []int {
+	return append(slice[:i], slice[i+1:]...)
 }

@@ -4,7 +4,6 @@ import (
 	"aoc/shared"
 	"fmt"
 	"log"
-	"math"
 	"sort"
 )
 
@@ -29,11 +28,7 @@ func (l PairOfLists) getDistance() int {
 
 	distance := 0
 	for i := 0; i < len(l.ListA); i++ {
-		if l.ListA[i] != l.ListB[i] {
-			mx := math.Max(float64(l.ListA[i]), float64(l.ListB[i]))
-			mn := math.Min(float64(l.ListA[i]), float64(l.ListB[i]))
-			distance = distance + int(mx-mn)
-		}
+		distance = distance + shared.IntDifference(l.ListA[i], l.ListB[i])
 	}
 	return distance
 }
