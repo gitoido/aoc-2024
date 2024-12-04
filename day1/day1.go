@@ -1,14 +1,11 @@
 package main
 
 import (
-	"bufio"
+	"aoc/shared"
 	"fmt"
 	"log"
 	"math"
-	"os"
 	"sort"
-	"strconv"
-	"strings"
 )
 
 type PairOfLists struct {
@@ -63,25 +60,11 @@ func (l PairOfLists) SimilarityScore() int {
 }
 
 func main() {
-	f, err := os.OpenFile("day1/day1.txt", os.O_RDONLY, os.ModePerm)
-	if err != nil {
-		log.Fatalf("error opening file: %v\n", err)
-		return
-	}
-	defer f.Close()
-
-	sc := bufio.NewScanner(f)
+	data := shared.ReadFileToIntSlice("day1/day1.txt")
 	var p PairOfLists
-	for sc.Scan() {
-		items := strings.Fields(sc.Text())
-		a, _ := strconv.Atoi(items[0])
-		b, _ := strconv.Atoi(items[1])
-		p.ListA = append(p.ListA, a)
-		p.ListB = append(p.ListB, b)
-	}
-	if err := sc.Err(); err != nil {
-		log.Fatalf("scan file error: %v", err)
-		return
+	for i := 0; i < len(data); i++ {
+		p.ListA = append(p.ListA, data[i][0])
+		p.ListB = append(p.ListB, data[i][1])
 	}
 
 	fmt.Println(p.getDistance())
